@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حياة | Life Hub</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png">
+    <link rel="shortcut icon"
+        href="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2d3a1f;
+            --bg: #e2f0eb;
+            --white: #ffffff;
+            --text: #2d3a1f;
+            --text-light: #5a6b4a;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-lang="en"] {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            display: none;
+            padding: 40px 0;
+            animation: fadeIn 0.6s ease-out forwards;
+            flex-grow: 1;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        nav a.active-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        .lang-switch {
+            background: var(--primary);
+            color: var(--bg);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .hero img {
+            max-width: 250px;
+            margin-bottom: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        /* --- Grid & Items --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .portfolio-item,
+        .service-card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-item:hover,
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Service Card --- */
+        .service-card {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .btn-subscribe {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        /* --- Modal Form --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        [dir="ltr"] .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--bg);
+            border-radius: 12px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .about-card {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 2.22rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
+            background: var(--primary);
+            color: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: var(--transition);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        /* --- Success Page --- */
+        .success-content {
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .success-icon-circle {
+            width: 100px;
+            height: 100px;
+            background: #dcfce7;
+            color: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lang-changing {
+            animation: langAnim 0.4s ease-in-out;
+        }
+
+        @keyframes langAnim {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .portfolio-item img {
+                height: 200px;
+            }
+
+            [id="gallery"] .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            [id="services"] .grid,
+            [id="packages"] .grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .badge {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                background: #d4af37;
+                color: white;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                font-weight: 800;
+                box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+            }
+
+            [dir="ltr"] .badge {
+                left: auto;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png"
+                    alt="Logo" class="logo-img" onclick="showPage('home')">
+            </div>
+            <nav>
+                <ul>
+                    <li><a id="link-home" onclick="showPage('home')" class="active-link"
+                            data-i18n="nav-home">الرئيسية</a></li>
+                    <li><a id="link-gallery" onclick="showPage('gallery')" data-i18n="nav-gallery">معرض الصور</a></li>
+                    <li><a id="link-services" onclick="showPage('services')" data-i18n="nav-services">خدماتنا</a></li>
+                    <li><a id="link-packages" onclick="showPage('packages')" data-i18n="nav-packages">باقاتنا</a></li>
+                    <li><a id="link-about" onclick="showPage('about')" data-i18n="nav-about">تعرف علينا</a></li>
+                </ul>
+                <button class="lang-switch" onclick="toggleLang()" id="langBtn">English</button>
+            </nav>
+        </header>
+
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <img src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png"
+                    alt="Life Hub Main Logo">
+                <h1 data-i18n="hero-title">LIFE HUB</h1>
+                <p data-i18n="hero-desc">جمال الطبيعة، بساطة الحياة.</p>
+                <br>
+                <a onclick="showPage('services')" class="btn-subscribe" data-i18n="btn-explore">استكشف الخدمات</a>
+            </div>
+        </section>
+
+        <!-- Gallery Page -->
+        <section id="gallery" class="page">
+            <h2 class="section-title" style="text-align: center;" data-i18n="gallery-title">معرض الصور</h2>
+            <div class="grid">
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/1.png"
+                        alt="1"></div>
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/2.png"
+                        alt="2"></div>
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/3.png"
+                        alt="3"></div>
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC1.png"
+                        alt="4"></div>
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC2.png"
+                        alt="5"></div>
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC3.png"
+                        alt="6"></div>
+                <div class="portfolio-item"><img
+                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC4.png"
+                        alt="7"></div>
+            </div>
+        </section>
+
+        <!-- Services Page -->
+        <section id="services" class="page">
+            <h2 class="section-title" style="text-align: center;" data-i18n="services-title">خدماتنا المميزة</h2>
+            <div class="grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 30px auto;">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-video"></i></div>
+                    <h3 data-i18n="service1-title">إنتاج مقاطع الفيديو</h3>
+                    <p data-i18n="service1-desc">صناعة وتعديل فيديوهات احترافية تجذب الانتباه وتعزز حضورك.</p>
+                    <button class="btn-subscribe" onclick="openSubscribe('إنتاج مقاطع الفيديو')"
+                        data-i18n="btn-subscribe">اشتراك الآن</button>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-ad"></i></div>
+                    <h3 data-i18n="service2-title">إطلاق الحملات الإعلانية</h3>
+                    <p data-i18n="service2-desc">ندير حملاتك على منصات التواصل لضمان وصولك للجمهور المستهدف.</p>
+                    <button class="btn-subscribe" onclick="openSubscribe('إطلاق الحملات الإعلانية')"
+                        data-i18n="btn-subscribe">اشتراك الآن</button>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-image"></i></div>
+                    <h3 data-i18n="service3-title">تصميم الصور الدعائية</h3>
+                    <p data-i18n="service3-desc">تصاميم إبداعية وجذابة لمنشوراتك وإعلاناتك.</p>
+                    <button class="btn-subscribe" onclick="openSubscribe('تصميم الصور الدعائية')"
+                        data-i18n="btn-subscribe">اشتراك الآن</button>
+                </div>
+                <!-- Service 4 (Logo) -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
+                    <h3 data-i18n="service4-title">تصميم الهويات البصرية</h3>
+                    <p data-i18n="service4-desc">تصميم شعارات وهويات بصرية متكاملة تميز علامتك التجارية.</p>
+                    <button class="btn-subscribe" onclick="openSubscribe('تصميم الشعارات والهويات البصرية')"
+                        data-i18n="btn-subscribe">اشتراك الآن</button>
+                </div>
+                <!-- Service 5 (Web) -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-globe"></i></div>
+                    <h3 data-i18n="service5-title">إنشاء المواقع ورفعها</h3>
+                    <p data-i18n="service5-desc">نصمم ونطور موقعك الإلكتروني ونقوم برفعه على الويب باحترافية.</p>
+                    <button class="btn-subscribe" onclick="openSubscribe('إنشاء المواقع ورفعها')"
+                        data-i18n="btn-subscribe">اشتراك الآن</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Page -->
+        <section id="packages" class="page">
+            <h2 class="section-title" style="text-align: center;" data-i18n="packages-title">باقات الاشتراك</h2>
+            <div class="grid" style="grid-template-columns: 1fr; max-width: 600px; margin: 30px auto;">
+                <!-- Package 2 (Most Popular) -->
+                <div class="service-card"
+                    style="border: 3px solid #d4af37; background: #fffcf5; box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); position: relative; overflow: visible; transform: scale(1.02); margin-bottom: 20px;">
+                    <div class="badge" data-i18n="most-popular">الأكثر طلباً</div>
+                    <div class="service-icon" style="color: #d4af37;"><i class="fas fa-gem"></i></div>
+                    <h3 data-i18n="package2-title">الباقة المتكاملة (Life Hub Pro)</h3>
+                    <div style="margin-bottom: 20px;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--primary);">69 BHD</span>
+                        <span style="color: var(--text-light);" data-i18n="monthly">/ شهرياً</span>
+                    </div>
+                    <ul style="list-style: none; margin-bottom: 25px; color: var(--text-light); text-align: center;">
+                        <li data-i18n="p2-feature1">✅ 25 تصميم احترافي</li>
+                        <li data-i18n="p2-feature2">✅ 7 فيديوهات ممنتجة</li>
+                        <li data-i18n="p2-feature3">✅ إطلاق وإدارة حملة إعلانية</li>
+                        <li data-i18n="p2-feature4">✅ إنشاء وبرمجة موقع إلكتروني</li>
+                    </ul>
+                    <button class="btn-subscribe" onclick="openSubscribe('الباقة المتكاملة - 69 BHD')"
+                        data-i18n="btn-subscribe-package" style="background: #d4af37;">اشتراك في الباقة</button>
+                </div>
+                <!-- Package 1 -->
+                <div class="service-card"
+                    style="border: 2px solid var(--primary); background: #fdfdfd; position: relative; overflow: visible;">
+                    <div class="service-icon" style="color: #d4af37;"><i class="fas fa-crown"></i></div>
+                    <h3 data-i18n="package-title">الباقة الشاملة (Life Hub Plus)</h3>
+                    <div style="margin-bottom: 20px;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--primary);">49 BHD</span>
+                        <span style="color: var(--text-light);" data-i18n="monthly">/ شهرياً</span>
+                    </div>
+                    <ul style="list-style: none; margin-bottom: 25px; color: var(--text-light); text-align: center;">
+                        <li data-i18n="p-feature1">✅ 20 تصميم احترافي</li>
+                        <li data-i18n="p-feature2">✅ 2-5 فيديوهات ممنتجة</li>
+                        <li data-i18n="p-feature3">✅ إطلاق وإدارة حملة إعلانية</li>
+                    </ul>
+                    <button class="btn-subscribe" onclick="openSubscribe('الباقة الشاملة - 49 BHD')"
+                        data-i18n="btn-subscribe-package">اشتراك في الباقة</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <div class="about-card">
+                <h2 class="section-title" data-i18n="about-title">تعرف علينا</h2>
+                <p data-i18n="about-desc">نحن في حياة نؤمن بأن البساطة هي قمة الرقي. نسعى لتقديم محتوى ملهم في حياتنا
+                    اليومية.</p>
+                <div class="socials">
+                    <a href="https://www.tiktok.com/@life.hub.bh" target="_blank" class="social-btn"><i
+                            class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/life.hub.bh/" target="_blank" class="social-btn"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+                <br>
+                <a href="admin.html"
+                    style="color: var(--text-light); text-decoration: none; font-size: 0.8rem; opacity: 0.5;">لوحة
+                    الإدارة</a>
+            </div>
+        </section>
+
+        <!-- Success Page -->
+        <section id="success" class="page">
+            <div class="success-content">
+                <div class="success-icon-circle">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 class="section-title" data-i18n="success-title">شكراً لثقتك بنا!</h2>
+                <p style="color: var(--text-light); font-size: 1.1rem; margin-bottom: 40px;"
+                    data-i18n="success-msg-full">
+                    تم استلام طلبك بنجاح، فريقنا سيقوم بالتواصل معك في أقرب وقت ممكن لمناقشة التفاصيل.
+                </p>
+                <button class="btn-subscribe" onclick="showPage('home')" data-i18n="btn-back-home">العودة
+                    للرئيسية</button>
+            </div>
+        </section>
+
+        <footer>
+            <span data-i18n="footer-copy">&copy; 2026 حياة (Life Hub). جميع الحقوق محفوظة.</span>
+        </footer>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div id="subModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="margin-bottom: 20px;">طلب الخدمة</h2>
+            <form id="subForm" onsubmit="submitForm(event)">
+                <input type="hidden" id="serviceName">
+                <div class="form-group">
+                    <label data-i18n="label-name">الاسم بالكامل</label>
+                    <input type="text" id="userName" required placeholder="أدخل اسمك">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="label-phone">رقم التواصل</label>
+                    <input type="tel" id="userPhone" required placeholder="مثال: 973XXXXXX">
+                </div>
+                <button type="submit" class="btn-subscribe" style="width: 100%;" data-i18n="btn-send">إرسال
+                    الطلب</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            ar: {
+                'nav-home': 'الرئيسية', 'nav-gallery': 'معرض الصور', 'nav-services': 'خدماتنا',
+                'nav-packages': 'باقاتنا', 'nav-about': 'تعرف علينا',
+                'hero-title': 'LIFE HUB', 'hero-desc': 'جمال الطبيعة، بساطة الحياة.', 'btn-explore': 'استكشف الخدمات',
+                'gallery-title': 'معرض الصور', 'services-title': 'خدماتنا المميزة', 'packages-title': 'باقات الاشتراك',
+                'service1-title': 'إنتاج مقاطع الفيديو', 'service1-desc': 'صناعة وتعديل فيديوهات احترافية تجذب الانتباه وتعزز حضورك.',
+                'service2-title': 'إطلاق الحملات الإعلانية', 'service2-desc': 'ندير حملاتك على منصات التواصل لضمان وصولك للجمهور المستهدف.',
+                'service3-title': 'تصميم الصور الدعائية', 'service3-desc': 'تصاميم إبداعية وجذابة لمنشوراتك وإعلاناتك.',
+                'service4-title': 'تصميم الهويات البصرية', 'service4-desc': 'تصميم شعارات وهويات بصرية متكاملة تميز علامتك التجارية.',
+                'service5-title': 'إنشاء المواقع ورفعها', 'service5-desc': 'نصمم ونطور موقعك الإلكتروني ونقوم برفعه على الويب باحترافية.',
+                'package-title': 'الباقة الشاملة (Life Hub Plus)', 'monthly': '/ شهرياً',
+                'most-popular': 'الأكثر طلباً',
+                'p-feature1': '✅ 20 تصميم احترافي', 'p-feature2': '✅ 2-5 فيديوهات ممنتجة', 'p-feature3': '✅ إطلاق وإدارة حملة إعلانية',
+                'package2-title': 'الباقة المتكاملة (Life Hub Pro)',
+                'p2-feature1': '✅ 25 تصميم احترافي', 'p2-feature2': '✅ 7 فيديوهات ممنتجة', 'p2-feature3': '✅ إطلاق وإدارة حملة إعلانية', 'p2-feature4': '✅ إنشاء وبرمجة موقع إلكتروني',
+                'btn-subscribe': 'اشتراك الآن', 'btn-subscribe-package': 'اشتراك في الباقة',
+                'about-title': 'تعرف علينا',
+                'about-desc': 'نحن في حياة نؤمن بأن البساطة هي قمة الرقي. نسعى لتقديم محتوى ملهم في حياتنا اليومية.',
+                'footer-copy': '&copy; 2026 حياة (Life Hub). جميع الحقوق محفوظة.', 'lang-btn': 'English',
+                'label-name': 'الاسم بالكامل', 'label-phone': 'رقم التواصل', 'btn-send': 'إرسال الطلب',
+                'success-title': 'شكراً لثقتك بنا!',
+                'success-msg-full': 'تم استلام طلبك بنجاح، فريقنا سيقوم بالتواصل معك في أقرب وقت ممكن لمناقشة التفاصيل.',
+                'btn-back-home': 'العودة للرئيسية'
+            },
+            en: {
+                'nav-home': 'Home', 'nav-gallery': 'Gallery', 'nav-services': 'Services',
+                'nav-packages': 'Packages', 'nav-about': 'About Us',
+                'hero-title': 'LIFE HUB', 'hero-desc': 'Beauty of nature, simplicity of life.', 'btn-explore': 'Explore Services',
+                'gallery-title': 'Photo Gallery', 'services-title': 'Our Premium Services', 'packages-title': 'Subscription Packages',
+                'service1-title': 'Video Production', 'service1-desc': 'Professional video creation and editing that boosts your presence.',
+                'service2-title': 'Ad Campaigns', 'service2-desc': 'We manage your social media campaigns to reach the target audience.',
+                'service3-title': 'Ad Image Design', 'service3-desc': 'Creative and attractive designs for your posts and ads.',
+                'service4-title': 'Visual Identity', 'service4-desc': 'Design unique logos and complete visual identities for your brand.',
+                'service5-title': 'Web Development', 'service5-desc': 'We design, develop, and deploy your professional website to the web.',
+                'package-title': 'All-in-One Package (Plus)', 'monthly': '/ Monthly',
+                'most-popular': 'Most Popular',
+                'p-feature1': '✅ 20 Professional Designs', 'p-feature2': '✅ 2-5 Edited Videos', 'p-feature3': '✅ Campaign Launch & Management',
+                'package2-title': 'Complete Package (Pro)',
+                'p2-feature1': '✅ 25 Professional Designs', 'p2-feature2': '✅ 7 Edited Videos', 'p2-feature3': '✅ Campaign Launch & Management', 'p2-feature4': '✅ Website Creation & Deployment',
+                'btn-subscribe': 'Subscribe Now', 'btn-subscribe-package': 'Join the Package',
+                'about-title': 'About Us',
+                'about-desc': 'In Life, we believe simplicity is the ultimate sophistication. We provide inspiration everyday.',
+                'footer-copy': '&copy; 2026 Life Hub. All rights reserved.', 'lang-btn': 'العربية',
+                'label-name': 'Full Name', 'label-phone': 'Phone Number', 'btn-send': 'Send Request',
+                'success-title': 'Thank you for your trust!',
+                'success-msg-full': 'Your request has been received successfully. Our team will contact you as soon as possible to discuss the details.',
+                'btn-back-home': 'Back to Home'
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLang() {
+            const container = document.querySelector('.container');
+            container.classList.add('lang-changing');
+            setTimeout(() => {
+                currentLang = currentLang === 'ar' ? 'en' : 'ar';
+                document.documentElement.lang = currentLang;
+                document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+                updateContent();
+            }, 200);
+            setTimeout(() => container.classList.remove('lang-changing'), 400);
+        }
+
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = translations[currentLang][key];
+            });
+            document.getElementById('langBtn').innerText = translations[currentLang]['lang-btn'];
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('nav a').forEach(l => l.classList.remove('active-link'));
+            const linkId = 'link-' + pageId;
+            if (document.getElementById(linkId)) document.getElementById(linkId).classList.add('active-link');
+            window.scrollTo(0, 0);
+        }
+
+        function openSubscribe(service) {
+            document.getElementById('serviceName').value = service;
+            document.getElementById('modalTitle').innerText = (currentLang === 'ar' ? 'طلب: ' : 'Order: ') + service;
+            document.getElementById('subModal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('subModal').style.display = 'none'; }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            const requestData = {
+                name: document.getElementById('userName').value,
+                phone: document.getElementById('userPhone').value,
+                service: document.getElementById('serviceName').value
+            };
+
+            try {
+                const response = await fetch('/api/requests', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (response.ok) {
+                    closeModal();
+                    document.getElementById('subForm').reset();
+                    showPage('success');
+                } else {
+                    alert('Error saving request');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Server Error');
+            }
+        }
+    </script>
+</body>
+
+</html>
