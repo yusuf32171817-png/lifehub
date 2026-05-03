@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حياة | الإدارة</title>
     <link rel="icon" type="image/png"
-        href="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png">
+        href="لوجو حياة.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Outfit:wght@300;400;600;800&display=swap"
         rel="stylesheet">
@@ -136,9 +136,98 @@
             justify-content: flex-end;
         }
 
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 30px;
+            width: 95%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        /* تحسين شكل المدخلات */
+        textarea, input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eef2f1;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            background: #f9fbfb;
+        }
+
+        textarea:focus, input:focus {
+            border-color: var(--primary);
+            background: #fff;
+            outline: none;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 58, 31, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--bg);
+            border-radius: 10px;
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 width: 80px;
+                padding: 20px 10px;
+            }
+
+            .sidebar-logo img {
+                height: 40px;
+                margin-bottom: 20px;
             }
 
             .nav-link span {
@@ -149,41 +238,379 @@
                 margin-right: 80px;
             }
         }
-    </style>
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: fixed;
+                bottom: 0;
+                top: auto;
+                left: 0;
+                width: 100%;
+                height: 70px;
+                padding: 10px;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            }
+
+            .sidebar-logo {
+                display: none;
+            }
+
+            nav {
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .nav-link {
+                flex-direction: column;
+                gap: 5px;
+                padding: 5px;
+                font-size: 0.75rem;
+            }
+
+            .nav-link i {
+                font-size: 1.2rem;
+            }
+
+            .nav-link span {
+                display: block;
+                font-size: 0.7rem;
+            }
+
+            .main-content {
+                margin-right: 0;
+                margin-bottom: 70px;
+                padding: 20px 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                padding: 10px;
+                border-radius: 15px;
+            }
+
+            table {
+                min-width: 600px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                padding: 15px;
+            }
+
+            .nav-link {
+                padding: 10px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            th, td {
+                padding: 10px 5px;
+                font-size: 0.8rem;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .btn-whatsapp, .btn-delete {
+                font-size: 1rem;
+                padding: 8px;
+            }
+        }
+            .login-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .login-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px 40px;
+            text-align: center;
+            color: var(--text);
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border: 2px solid var(--glass-border);
+            border-radius: 12px;
+            background: var(--glass-bg);
+            color: var(--text);
+        }
+        .login-box button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+</style>
 </head>
 
 <body>
+<div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+        <h2>دخول الإدارة</h2>
+        <input type="password" id="adminPassword" placeholder="كلمة المرور">
+        <button onclick="checkAdminPassword()">دخول</button>
+        <p id="loginError" style="color: var(--danger); display:none;">كلمة المرور غير صحيحة</p>
+    </div>
+</div>
     <aside class="sidebar">
         <div class="sidebar-logo"><img
-                src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png">
+                src="لوجو حياة.png">
         </div>
-        <nav><a href="#" class="nav-link active"><i class="fas fa-home"></i><span>لوحة التحكم</span></a><a
+        <nav><a href="#" class="nav-link active" onclick="showTab('requests')"><i class="fas fa-home"></i><span>الطلبات</span></a><a
+                href="#" class="nav-link" onclick="showTab('websites')"><i class="fas fa-globe"></i><span>المواقع</span></a><a
+                href="#" class="nav-link" onclick="showTab('images')"><i class="fas fa-images"></i><span>الصور</span></a><a
+                href="#" class="nav-link" onclick="showTab('videos')"><i class="fas fa-video"></i><span>الفيديوهات</span></a><a
                 href="index.html" class="nav-link"><i class="fas fa-external-link-alt"></i><span>عرض الموقع</span></a>
         </nav>
     </aside>
     <main class="main-content">
-        <div class="header">
-            <h1>إدارة الطلبات</h1><button onclick="clearAll()"
-                style="background: var(--danger); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer;">مسح
-                الكل</button>
+        <!-- Requests Tab -->
+        <div id="requests-tab" class="tab-content active">
+            <div class="header">
+                <h1>إدارة الطلبات</h1><button onclick="clearAllRequests()"
+                    style="background: var(--danger); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer;">مسح
+                    الكل</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>العميل</th>
+                            <th>الخدمة</th>
+                            <th>التواصل</th>
+                            <th>التاريخ</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requestsTable"></tbody>
+                </table>
+                <p id="noData" style="text-align: center; padding: 20px; display: none;">لا توجد طلبات</p>
+            </div>
         </div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>العميل</th>
-                        <th>الخدمة</th>
-                        <th>التواصل</th>
-                        <th>التاريخ</th>
-                        <th>إجراء</th>
-                    </tr>
-                </thead>
-                <tbody id="requestsTable"></tbody>
-            </table>
-            <p id="noData" style="text-align: center; padding: 20px; display: none;">لا توجد طلبات</p>
+
+        <!-- Websites Tab -->
+        <div id="websites-tab" class="tab-content">
+            <div class="header">
+                <h1>إدارة المواقع</h1><button onclick="showAddWebsiteModal()"
+                    style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer;">إضافة موقع</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم الموقع</th>
+                            <th>الرابط</th>
+                            <th>الصورة</th>
+                            <th>التاريخ</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="websitesTable"></tbody>
+                </table>
+                <p id="noWebsites" style="text-align: center; padding: 20px; display: none;">لا توجد مواقع</p>
+            </div>
+        </div>
+
+        <!-- Images Tab -->
+        <div id="images-tab" class="tab-content">
+            <div class="header">
+                <h1>إدارة الصور</h1><button onclick="showAddImageModal()"
+                    style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer;">إضافة صورة</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم الصورة</th>
+                            <th>الرابط</th>
+                            <th>التاريخ</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="imagesTable"></tbody>
+                </table>
+                <p id="noImages" style="text-align: center; padding: 20px; display: none;">لا توجد صور</p>
+            </div>
+        </div>
+
+        <!-- Videos Tab -->
+        <div id="videos-tab" class="tab-content">
+            <div class="header">
+                <h1>إدارة الفيديوهات</h1><button onclick="showAddVideoModal()"
+                    style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer;">إضافة فيديو</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم الفيديو</th>
+                            <th>الرابط</th>
+                            <th>التاريخ</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="videosTable"></tbody>
+                </table>
+                <p id="noVideos" style="text-align: center; padding: 20px; display: none;">لا توجد فيديوهات</p>
+            </div>
         </div>
     </main>
+
+    <!-- Add Website Modal -->
+    <div id="addWebsiteModal" class="modal">
+        <div class="modal-content">
+            <h2>إضافة موقع جديد</h2>
+            <form id="addWebsiteForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>اسم الموقع</label>
+                    <input type="text" id="websiteName" required>
+                </div>
+                <div class="form-group">
+                    <label>اسم الشركة</label>
+                    <input type="text" id="websiteCompany" required>
+                </div>
+                <div class="form-group">
+                    <label>وصف الموقع</label>
+                    <textarea id="websiteDescription" rows="4" required placeholder="وصف تفصيلي للموقع والخدمات المقدمة"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>رابط الموقع</label>
+                    <input type="text" id="websiteUrl" required placeholder="مثال: https://example.com أو example.com">
+                </div>
+                <div class="form-group">
+                    <label>صور الموقع (يمكن اختيار أكثر من صورة)</label>
+                    <input type="file" id="websiteImages" accept="image/*" multiple required>
+                </div>
+                <button type="submit" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">إضافة</button>
+                <button type="button" onclick="closeModal()" style="background: var(--danger); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-left: 10px;">إلغاء</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Image Modal -->
+    <div id="addImageModal" class="modal">
+        <div class="modal-content">
+            <h2>إضافة صورة جديدة</h2>
+            <form id="addImageForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>عنوان المجموعة (مثال: تصميم محل عطور)</label>
+                    <input type="text" id="imageName" required placeholder="ادخل عنواناً للمجموعة">
+                </div>
+                <div class="form-group">
+                    <label>الصور (يمكنك اختيار صور متعددة)</label>
+                    <input type="file" id="imageFile" accept="image/*" multiple required>
+                </div>
+                <button type="submit" class="btn-submit">حفظ وإضافة</button>
+                <button type="button" onclick="closeModal()" style="background: var(--danger); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-top: 10px; width: 100%;">إلغاء</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Video Modal -->
+    <div id="addVideoModal" class="modal">
+        <div class="modal-content">
+            <h2>إضافة فيديو جديد</h2>
+            <form id="addVideoForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>اسم الفيديو</label>
+                    <input type="text" id="videoName" required>
+                </div>
+                <div class="form-group">
+                    <label>الفيديو</label>
+                    <input type="file" id="videoFile" accept="video/*" required>
+                </div>
+                <button type="submit" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">إضافة</button>
+                <button type="button" onclick="closeModal()" style="background: var(--danger); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-left: 10px;">إلغاء</button>
+            </form>
+        </div>
+    </div>
     <script>
+        let currentTab = 'requests';
+
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+            document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+            currentTab = tab;
+            if (tab === 'requests') loadRequests();
+            else if (tab === 'websites') loadWebsites();
+            else if (tab === 'images') loadImages();
+            else if (tab === 'videos') loadVideos();
+        }
+
+        function showAddWebsiteModal() {
+            document.getElementById('addWebsiteModal').style.display = 'block';
+        }
+
+        function showAddImageModal() {
+            document.getElementById('addImageModal').style.display = 'block';
+        }
+
+        function showAddVideoModal() {
+            document.getElementById('addVideoModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('addWebsiteModal').style.display = 'none';
+            document.getElementById('addImageModal').style.display = 'none';
+            document.getElementById('addVideoModal').style.display = 'none';
+        }
+
         async function loadRequests() {
             try {
                 const res = await fetch('/api/requests');
@@ -218,10 +645,172 @@
                 }
             } catch (e) { console.error(e); }
         }
+
+        async function loadWebsites() {
+            try {
+                const res = await fetch('/api/websites');
+                const data = await res.json();
+                const table = document.getElementById('websitesTable');
+                const noData = document.getElementById('noWebsites');
+                table.innerHTML = '';
+                if (data.length === 0) noData.style.display = 'block';
+                else {
+                    noData.style.display = 'none';
+                    data.forEach(site => {
+                        const imagesHtml = Array.isArray(site.images) ? site.images.map(img => `<img src="${img}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin: 2px;">`).join('') : `<img src="${site.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">`;
+                        table.innerHTML += `
+                            <tr>
+                                <td>${site.name}</td>
+                                <td><a href="${site.url.startsWith('http') ? site.url : 'https://' + site.url}" target="_blank">${site.url}</a></td>
+                                <td>${imagesHtml}</td>
+                                <td>${site.date}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button onclick="deleteWebsite(${site.id})" class="btn-delete" title="حذف">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                    });
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadImages() {
+            try {
+                const res = await fetch('/api/images');
+                const data = await res.json();
+                const table = document.getElementById('imagesTable');
+                const noData = document.getElementById('noImages');
+                table.innerHTML = '';
+                if (data.length === 0) noData.style.display = 'block';
+                else {
+                    noData.style.display = 'none';
+                    data.forEach(img => {
+                        const imagesPreview = (img.urls || [img.url]).map(url => `
+                            <img src="${url}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin: 2px; border: 1px solid #eee;">
+                        `).join('');
+                        
+                        table.innerHTML += `
+                            <tr>
+                                <td><strong>${img.name}</strong></td>
+                                <td><div style="display: flex; flex-wrap: wrap; max-width: 200px;">${imagesPreview}</div></td>
+                                <td>${img.date}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button onclick="deleteImage(${img.id})" class="btn-delete" title="حذف">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                    });
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadVideos() {
+            try {
+                const res = await fetch('/api/videos');
+                const data = await res.json();
+                const table = document.getElementById('videosTable');
+                const noData = document.getElementById('noVideos');
+                table.innerHTML = '';
+                if (data.length === 0) noData.style.display = 'block';
+                else {
+                    noData.style.display = 'none';
+                    data.forEach(video => {
+                        table.innerHTML += `
+                            <tr>
+                                <td>${video.name}</td>
+                                <td><video src="${video.url}" controls style="width: 100px; height: 50px; object-fit: cover; border-radius: 5px;"></video></td>
+                                <td>${video.date}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button onclick="deleteVideo(${video.id})" class="btn-delete" title="حذف">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                    });
+                }
+            } catch (e) { console.error(e); }
+        }
+
         async function deleteReq(id) { if (confirm('حذف؟')) { await fetch('/api/requests/' + id, { method: 'DELETE' }); loadRequests(); } }
-        async function clearAll() { if (confirm('مسح الكل؟')) { await fetch('/api/requests', { method: 'DELETE' }); loadRequests(); } }
-        setInterval(loadRequests, 5000); loadRequests();
-    </script>
+        async function deleteWebsite(id) { if (confirm('حذف؟')) { await fetch('/api/websites/' + id, { method: 'DELETE' }); loadWebsites(); } }
+        async function deleteImage(id) { if (confirm('حذف؟')) { await fetch('/api/images/' + id, { method: 'DELETE' }); loadImages(); } }
+        async function deleteVideo(id) { if (confirm('حذف؟')) { await fetch('/api/videos/' + id, { method: 'DELETE' }); loadVideos(); } }
+
+        async function clearAllRequests() { if (confirm('مسح الكل؟')) { await fetch('/api/requests', { method: 'DELETE' }); loadRequests(); } }
+
+        document.getElementById('addWebsiteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('name', document.getElementById('websiteName').value);
+            formData.append('company', document.getElementById('websiteCompany').value);
+            formData.append('description', document.getElementById('websiteDescription').value);
+            formData.append('url', document.getElementById('websiteUrl').value);
+            const files = document.getElementById('websiteImages').files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i]);
+            }
+            await fetch('/api/websites', { method: 'POST', body: formData });
+            closeModal();
+            document.getElementById('addWebsiteForm').reset();
+            loadWebsites();
+        });
+
+        document.getElementById('addImageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('name', document.getElementById('imageName').value);
+            const files = document.getElementById('imageFile').files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i]);
+            }
+            await fetch('/api/images', { method: 'POST', body: formData });
+            closeModal();
+            document.getElementById('addImageForm').reset();
+            loadImages();
+        });
+
+        document.getElementById('addVideoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('name', document.getElementById('videoName').value);
+            formData.append('video', document.getElementById('videoFile').files[0]);
+            await fetch('/api/videos', { method: 'POST', body: formData });
+            closeModal();
+            document.getElementById('addVideoForm').reset();
+            loadVideos();
+        });
+
+        setInterval(() => {
+            if (currentTab === 'requests') loadRequests();
+        }, 5000);
+        showTab('requests');
+    function checkAdminPassword() {
+    const pwd = document.getElementById('adminPassword').value;
+    if (pwd === '123123') {
+        sessionStorage.setItem('adminAuth', 'true');
+        document.getElementById('loginOverlay').style.display = 'none';
+    } else {
+        const err = document.getElementById('loginError');
+        err.style.display = 'block';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('adminAuth') === 'true') {
+        document.getElementById('loginOverlay').style.display = 'none';
+    } else {
+        document.getElementById('loginOverlay').style.display = 'flex';
+    }
+});
+</script>
 </body>
 
 </html>

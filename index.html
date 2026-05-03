@@ -7,9 +7,9 @@
     <title>حياة | Life Hub</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png"
-        href="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png">
+        href="لوجو حياة.png">
     <link rel="shortcut icon"
-        href="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png">
+        href="لوجو حياة.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,12 +21,43 @@
 
     <style>
         :root {
-            --primary: #2d3a1f;
-            --bg: #e2f0eb;
+            --primary: #d4af37; /* Gold */
+            --primary-dark: #b5952f;
+            --bg: #0f1522; /* Dark but comfortable for eyes */
             --white: #ffffff;
-            --text: #2d3a1f;
-            --text-light: #5a6b4a;
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --text: #e2e8f0;
+            --text-light: #94a3b8;
+            --glass-bg: rgba(15, 21, 34, 0.7);
+            --glass-border: rgba(212, 175, 55, 0.2);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.light-mode {
+            --bg: #f8fafc; /* Soft comfortable light color */
+            --text: #0f172a;
+            --text-light: #475569;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(212, 175, 55, 0.4);
+        }
+
+        .theme-switch {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--glass-border);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .theme-switch:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--primary);
         }
 
         [data-lang="en"] {
@@ -46,12 +77,34 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            position: relative;
+        }
+
+        /* Tech Abstract Background using CSS */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(45, 100, 255, 0.08) 0%, transparent 50%),
+                url('data:image/svg+xml;utf8,<svg opacity="0.03" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none"/><path d="M0 50h100M50 0v100" stroke="%23ffffff" stroke-width="0.5"/></svg>');
+            z-index: -1;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        body.light-mode::before {
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(45, 100, 255, 0.1) 0%, transparent 50%),
+                url('data:image/svg+xml;utf8,<svg opacity="0.04" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none"/><path d="M0 50h100M50 0v100" stroke="%230f172a" stroke-width="0.5"/></svg>');
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 5%;
+            padding: 0 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -68,18 +121,28 @@
             display: block;
         }
 
+        /* Glassmorphism Navbar */
         header {
-            padding: 20px 0;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 900px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 10px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .logo-img {
-            height: 60px;
+            height: 45px;
             width: auto;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -93,58 +156,142 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 15px;
+            gap: 20px;
         }
 
         nav a {
             text-decoration: none;
-            color: var(--primary);
-            font-weight: 700;
+            color: var(--text-light);
+            font-weight: 600;
             font-size: 0.95rem;
             transition: var(--transition);
             cursor: pointer;
             position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover, nav a.active-link {
+            color: var(--primary);
         }
 
         nav a.active-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 2px;
             background: var(--primary);
             border-radius: 5px;
+            box-shadow: 0 0 10px var(--primary);
         }
 
         .lang-switch {
-            background: var(--primary);
-            color: var(--bg);
-            border: none;
-            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+            padding: 6px 15px;
             border-radius: 20px;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 0.8rem;
+            font-weight: 600;
+            font-size: 0.85rem;
             transition: var(--transition);
         }
 
+        .lang-switch:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--primary);
+        }
+
+        /* Hero Section with 3 Cards */
         .hero {
             text-align: center;
             padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
         }
 
-        .hero img {
-            max-width: 250px;
-            margin-bottom: 30px;
+        .hero-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 40px;
+        }
+
+        .hero-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 30px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-card.main-card {
+            width: 320px;
+            height: 380px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-card.main-card img {
+            width: 120px;
+            margin-bottom: 20px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-card.main-card h1 {
+            font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 10px;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero-card.main-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .hero-card.side-card {
+            width: 220px;
+            height: 280px;
+            cursor: pointer;
+            opacity: 0.9;
+        }
+
+        .hero-card.side-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            opacity: 1;
+        }
+
+        .hero-card.side-card i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .hero-card.side-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
         /* --- Grid & Items --- */
@@ -157,10 +304,13 @@
 
         .portfolio-item,
         .service-card {
-            background: var(--white);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
             border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
@@ -169,6 +319,8 @@
         .portfolio-item:hover,
         .service-card:hover {
             transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
         }
 
         .portfolio-item img {
@@ -176,6 +328,66 @@
             height: 350px;
             object-fit: cover;
             display: block;
+        }
+
+        .portfolio-item video {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 520px !important;
+            object-fit: contain !important;
+            display: block !important;
+            border-radius: 15px !important;
+        }
+
+        #videos-grid {
+            grid-template-columns: 1fr !important;
+            width: 100% !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+        }
+
+        #videos-grid .portfolio-item {
+            max-width: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        .website-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+        }
+
+        .website-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .website-link {
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+            padding: 15px;
+        }
+
+        .website-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        .website-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text);
         }
 
         /* --- Service Card --- */
@@ -188,11 +400,13 @@
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
         .service-card h3 {
             margin-bottom: 15px;
             font-weight: 800;
+            color: var(--primary);
         }
 
         .service-card p {
@@ -201,16 +415,24 @@
             font-size: 0.95rem;
         }
 
-        .btn-subscribe {
-            background: var(--primary);
-            color: var(--white);
+        .btn-subscribe, .btn-enter {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #000;
             border: none;
             padding: 12px 25px;
             border-radius: 15px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
-            transition: 0.3s;
+            transition: var(--transition);
             text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-subscribe:hover, .btn-enter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+            color: #000;
         }
 
         /* --- Modal Form --- */
@@ -221,21 +443,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             align-items: center;
             justify-content: center;
         }
 
         .modal-content {
-            background: var(--white);
+            background: var(--bg);
+            border: 1px solid var(--glass-border);
             padding: 40px;
             border-radius: 30px;
             width: 90%;
             max-width: 450px;
             text-align: center;
             position: relative;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
         }
 
         .close-modal {
@@ -243,28 +467,32 @@
             top: 20px;
             right: 20px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            transition: 0.3s;
         }
+        .close-modal:hover { color: var(--primary); }
 
         .form-group {
             margin-bottom: 20px;
             text-align: right;
         }
 
-        [dir="ltr"] .form-group {
-            text-align: left;
-        }
+        [dir="ltr"] .form-group { text-align: left; }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 700;
+            color: var(--text-light);
         }
 
         .form-group input {
             width: 100%;
             padding: 12px;
-            border: 2px solid var(--bg);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
             border-radius: 12px;
             outline: none;
             transition: 0.3s;
@@ -272,10 +500,13 @@
 
         .form-group input:focus {
             border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         .about-card {
-            background: var(--white);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
             border-radius: 40px;
             padding: 60px 40px;
             text-align: center;
@@ -286,6 +517,8 @@
             font-size: 2.22rem;
             margin-bottom: 20px;
             font-weight: 800;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         .socials {
@@ -299,13 +532,21 @@
             width: 55px;
             height: 55px;
             border-radius: 18px;
-            background: var(--primary);
-            color: var(--bg);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.6rem;
             transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
 
         footer {
@@ -320,62 +561,54 @@
         .success-content {
             text-align: center;
             padding: 60px 20px;
-            animation: fadeIn 0.8s ease-out;
         }
 
         .success-icon-circle {
             width: 100px;
             height: 100px;
-            background: #dcfce7;
+            background: rgba(34, 197, 94, 0.1);
             color: #22c55e;
+            border: 2px solid #22c55e;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             margin: 0 auto 30px;
-            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
 
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .lang-changing {
-            animation: langAnim 0.4s ease-in-out;
-        }
-
+        .lang-changing { animation: langAnim 0.4s ease-in-out; }
         @keyframes langAnim {
-            0% {
-                opacity: 1;
-            }
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-            50% {
-                opacity: 0.5;
+        /* Responsive "Impact" Design */
+        @media (max-width: 900px) {
+            .hero-cards {
+                flex-direction: column;
+                gap: 20px;
             }
-
-            100% {
-                opacity: 1;
+            .hero-card.main-card {
+                order: -1; /* Keep main card on top */
+            }
+            .hero-card.side-card {
+                width: 100%;
+                max-width: 320px;
+                height: auto;
+                padding: 20px;
+                flex-direction: row;
+                gap: 20px;
+            }
+            .hero-card.side-card i {
+                margin-bottom: 0;
+                font-size: 2.5rem;
             }
         }
 
@@ -383,30 +616,18 @@
             header {
                 flex-direction: column;
                 gap: 15px;
+                border-radius: 20px;
+                padding: 15px;
             }
 
-            nav {
-                flex-direction: column;
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
                 gap: 15px;
             }
 
             .grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            .portfolio-item img {
-                height: 200px;
-            }
-
-            [id="gallery"] .grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            [id="services"] .grid,
-            [id="packages"] .grid {
-                grid-template-columns: 1fr;
                 gap: 15px;
             }
 
@@ -414,19 +635,124 @@
                 position: absolute;
                 top: 15px;
                 left: 15px;
-                background: #d4af37;
-                color: white;
+                background: var(--primary);
+                color: #000;
                 padding: 4px 12px;
                 border-radius: 20px;
                 font-size: 0.75rem;
                 font-weight: 800;
-                box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
             }
 
-            [dir="ltr"] .badge {
-                left: auto;
-                right: 15px;
+            [dir="ltr"] .badge { left: auto; right: 15px; }
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            [id="gallery"] .grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-card.main-card {
+                width: 100%;
+                height: auto;
+                padding: 40px 20px;
             }
+            .hero-card.main-card h1 { font-size: 2rem; }
+            nav a { font-size: 0.85rem; }
+            .section-title { font-size: 1.8rem; }
+        }
+
+        /* --- New Gallery & Modal Styles --- */
+        .gallery-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-cat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-cat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .gallery-cat-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-cat-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .gallery-cat-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .gallery-section {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .gallery-section.active { display: block; }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 30px;
+            cursor: pointer;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .image-group {
+            margin-bottom: 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 30px;
+        }
+
+        .image-group-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: var(--primary);
+            padding-right: 15px;
+            border-right: 4px solid var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-menu { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -435,15 +761,18 @@
 
     <div class="container">
         <header>
-            <div class="logo">
-                <img src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png"
+            <div class="logo" style="display: flex; align-items: center; gap: 15px;">
+                <img src="لوجو حياة.png"
                     alt="Logo" class="logo-img" onclick="showPage('home')">
+                <button onclick="toggleTheme()" class="theme-switch" title="تغيير المظهر" id="themeBtn">
+                    <i class="fas fa-sun"></i>
+                </button>
             </div>
             <nav>
                 <ul>
                     <li><a id="link-home" onclick="showPage('home')" class="active-link"
                             data-i18n="nav-home">الرئيسية</a></li>
-                    <li><a id="link-gallery" onclick="showPage('gallery')" data-i18n="nav-gallery">معرض الصور</a></li>
+                    <li><a id="link-gallery" onclick="showPage('gallery')" data-i18n="nav-gallery">معرض الأعمال</a></li>
                     <li><a id="link-services" onclick="showPage('services')" data-i18n="nav-services">خدماتنا</a></li>
                     <li><a id="link-packages" onclick="showPage('packages')" data-i18n="nav-packages">باقاتنا</a></li>
                     <li><a id="link-about" onclick="showPage('about')" data-i18n="nav-about">تعرف علينا</a></li>
@@ -455,40 +784,80 @@
         <!-- Home Page -->
         <section id="home" class="page active">
             <div class="hero">
-                <img src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%84%D9%88%D8%AC%D9%88%20%D8%AD%D9%8A%D8%A7%D8%A9.png"
-                    alt="Life Hub Main Logo">
-                <h1 data-i18n="hero-title">LIFE HUB</h1>
-                <p data-i18n="hero-desc">جمال الطبيعة، بساطة الحياة.</p>
-                <br>
-                <a onclick="showPage('services')" class="btn-subscribe" data-i18n="btn-explore">استكشف الخدمات</a>
+                <div class="hero-cards">
+                    <div class="hero-card side-card" onclick="showGalleryCategory('images')">
+                        <i class="fas fa-pen-nib"></i>
+                        <h3 data-i18n="cat-design">تصميم إبداعي</h3>
+                    </div>
+                    <div class="hero-card main-card">
+                        <img src="لوجو حياة.png" alt="Life Hub Main Logo">
+                        <h1 data-i18n="hero-title">LIFE HUB</h1>
+                        <p data-i18n="hero-desc">جمال الطبيعة، بساطة الحياة.</p>
+                        <br>
+                        <a onclick="showPage('services')" class="btn-subscribe" data-i18n="btn-explore">استكشف الخدمات</a>
+                    </div>
+                    <div class="hero-card side-card" onclick="showGalleryCategory('websites')">
+                        <i class="fas fa-code"></i>
+                        <h3 data-i18n="cat-web">تطوير برمجيات</h3>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Gallery Page -->
         <section id="gallery" class="page">
-            <h2 class="section-title" style="text-align: center;" data-i18n="gallery-title">معرض الصور</h2>
-            <div class="grid">
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/1.png"
-                        alt="1"></div>
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/2.png"
-                        alt="2"></div>
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/3.png"
-                        alt="3"></div>
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC1.png"
-                        alt="4"></div>
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC2.png"
-                        alt="5"></div>
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC3.png"
-                        alt="6"></div>
-                <div class="portfolio-item"><img
-                        src="https://raw.githubusercontent.com/yusufaljamri313-commits/protofilio/5c597a2e56b2be26a2473e914c1db4bedb54297f/%D9%86%D9%85%D9%88%D8%B0%D8%AC4.png"
-                        alt="7"></div>
+            <!-- Gallery Header Menu -->
+            <div id="gallery-home" class="gallery-section active">
+                <h2 class="section-title" style="text-align: center;" data-i18n="gallery-title">معرض الأعمال</h2>
+                <div class="gallery-menu">
+                    <div class="gallery-cat-card" onclick="showGalleryCategory('websites')">
+                        <i class="fas fa-globe"></i>
+                        <h3 data-i18n="cat-web">مواقع إلكترونية</h3>
+                        <p data-i18n="cat-web-desc">تصميم وبرمجة مواقع عصرية ومتكاملة تتناسب مع هويتك.</p>
+                        <span class="btn-enter" data-i18n="btn-view">عرض النماذج</span>
+                    </div>
+                    <div class="gallery-cat-card" onclick="showGalleryCategory('images')">
+                        <i class="fas fa-palette"></i>
+                        <h3 data-i18n="cat-design">التصاميم الصورية</h3>
+                        <p data-i18n="cat-design-desc">هويات بصرية وتصاميم إبداعية فريدة لمنشوراتك.</p>
+                        <span class="btn-enter" data-i18n="btn-view">عرض النماذج</span>
+                    </div>
+                    <div class="gallery-cat-card" onclick="showGalleryCategory('videos')">
+                        <i class="fas fa-video"></i>
+                        <h3 data-i18n="cat-video">مونتاج الفيديو</h3>
+                        <p data-i18n="cat-video-desc">إنتاج مقاطع فيديو احترافية وجذابة لجمهورك.</p>
+                        <span class="btn-enter" data-i18n="btn-view">عرض النماذج</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Websites Sub-Gallery -->
+            <div id="gallery-websites" class="gallery-section">
+                <div class="back-btn" onclick="showGalleryCategory('home')">
+                    <i class="fas fa-arrow-right"></i> <span>العودة للمعرض</span>
+                </div>
+                <h2 class="section-title" data-i18n="cat-web">مواقع إلكترونية</h2>
+                <div class="grid" id="websites-grid"></div>
+            </div>
+
+            <!-- Images Sub-Gallery -->
+            <div id="gallery-images" class="gallery-section">
+                <div class="back-btn" onclick="showGalleryCategory('home')">
+                    <i class="fas fa-arrow-right"></i> <span>العودة للمعرض</span>
+                </div>
+                <h2 class="section-title" data-i18n="cat-design">التصاميم الصورية</h2>
+                <div id="images-container">
+                    <!-- سيتم تحميل الصور هنا مقسمة حسب العنوان -->
+                </div>
+            </div>
+
+            <!-- Videos Sub-Gallery -->
+            <div id="gallery-videos" class="gallery-section">
+                <div class="back-btn" onclick="showGalleryCategory('home')">
+                    <i class="fas fa-arrow-right"></i> <span>العودة للمعرض</span>
+                </div>
+                <h2 class="section-title" data-i18n="cat-video">مونتاج الفيديو</h2>
+                <div class="grid" id="videos-grid"></div>
             </div>
         </section>
 
@@ -545,7 +914,7 @@
             <div class="grid" style="grid-template-columns: 1fr; max-width: 600px; margin: 30px auto;">
                 <!-- Package 2 (Most Popular) -->
                 <div class="service-card"
-                    style="border: 3px solid #d4af37; background: #fffcf5; box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); position: relative; overflow: visible; transform: scale(1.02); margin-bottom: 20px;">
+                    style="border: 2px solid var(--primary); background: rgba(212, 175, 55, 0.05); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); position: relative; overflow: visible; transform: scale(1.02); margin-bottom: 20px;">
                     <div class="badge" data-i18n="most-popular">الأكثر طلباً</div>
                     <div class="service-icon" style="color: #d4af37;"><i class="fas fa-gem"></i></div>
                     <h3 data-i18n="package2-title">الباقة المتكاملة (Life Hub Pro)</h3>
@@ -560,11 +929,11 @@
                         <li data-i18n="p2-feature4">✅ إنشاء وبرمجة موقع إلكتروني</li>
                     </ul>
                     <button class="btn-subscribe" onclick="openSubscribe('الباقة المتكاملة - 69 BHD')"
-                        data-i18n="btn-subscribe-package" style="background: #d4af37;">اشتراك في الباقة</button>
+                        data-i18n="btn-subscribe-package" style="background: linear-gradient(135deg, #d4af37, #b5952f); color: #000;">اشتراك في الباقة</button>
                 </div>
                 <!-- Package 1 -->
                 <div class="service-card"
-                    style="border: 2px solid var(--primary); background: #fdfdfd; position: relative; overflow: visible;">
+                    style="border: 1px solid var(--glass-border); position: relative; overflow: visible;">
                     <div class="service-icon" style="color: #d4af37;"><i class="fas fa-crown"></i></div>
                     <h3 data-i18n="package-title">الباقة الشاملة (Life Hub Plus)</h3>
                     <div style="margin-bottom: 20px;">
@@ -642,10 +1011,14 @@
     <script>
         const translations = {
             ar: {
-                'nav-home': 'الرئيسية', 'nav-gallery': 'معرض الصور', 'nav-services': 'خدماتنا',
+                'nav-home': 'الرئيسية', 'nav-websites': 'مواقع إلكترونية', 'nav-gallery': 'معرض الأعمال', 'nav-services': 'خدماتنا',
                 'nav-packages': 'باقاتنا', 'nav-about': 'تعرف علينا',
                 'hero-title': 'LIFE HUB', 'hero-desc': 'جمال الطبيعة، بساطة الحياة.', 'btn-explore': 'استكشف الخدمات',
-                'gallery-title': 'معرض الصور', 'services-title': 'خدماتنا المميزة', 'packages-title': 'باقات الاشتراك',
+                'gallery-title': 'معرض الأعمال', 'websites-title': 'مواقع إلكترونية', 'services-title': 'خدماتنا المميزة', 'packages-title': 'باقات الاشتراك',
+                'cat-web': 'مواقع إلكترونية', 'cat-web-desc': 'تصميم وبرمجة مواقع عصرية ومتكاملة تتناسب مع هويتك.',
+                'cat-design': 'التصاميم الصورية', 'cat-design-desc': 'هويات بصرية وتصاميم إبداعية فريدة لمنشوراتك.',
+                'cat-video': 'مونتاج الفيديو', 'cat-video-desc': 'إنتاج مقاطع فيديو احترافية وجذابة لجمهورك.',
+                'btn-view': 'عرض النماذج',
                 'service1-title': 'إنتاج مقاطع الفيديو', 'service1-desc': 'صناعة وتعديل فيديوهات احترافية تجذب الانتباه وتعزز حضورك.',
                 'service2-title': 'إطلاق الحملات الإعلانية', 'service2-desc': 'ندير حملاتك على منصات التواصل لضمان وصولك للجمهور المستهدف.',
                 'service3-title': 'تصميم الصور الدعائية', 'service3-desc': 'تصاميم إبداعية وجذابة لمنشوراتك وإعلاناتك.',
@@ -667,13 +1040,17 @@
                 'btn-back-home': 'العودة للرئيسية'
             },
             en: {
-                'nav-home': 'Home', 'nav-gallery': 'Gallery', 'nav-services': 'Services',
+                'nav-home': 'Home', 'nav-websites': 'Websites', 'nav-gallery': 'Portfolio', 'nav-services': 'Services',
                 'nav-packages': 'Packages', 'nav-about': 'About Us',
                 'hero-title': 'LIFE HUB', 'hero-desc': 'Beauty of nature, simplicity of life.', 'btn-explore': 'Explore Services',
-                'gallery-title': 'Photo Gallery', 'services-title': 'Our Premium Services', 'packages-title': 'Subscription Packages',
+                'gallery-title': 'Portfolio', 'websites-title': 'Websites', 'services-title': 'Our Premium Services', 'packages-title': 'Subscription Packages',
+                'cat-web': 'Websites', 'cat-web-desc': 'Modern and integrated website design and development.',
+                'cat-design': 'Graphic Design', 'cat-design-desc': 'Unique visual identities and creative designs for posts.',
+                'cat-video': 'Video Editing', 'cat-video-desc': 'Professional and engaging video production for your audience.',
+                'btn-view': 'View Gallery',
                 'service1-title': 'Video Production', 'service1-desc': 'Professional video creation and editing that boosts your presence.',
                 'service2-title': 'Ad Campaigns', 'service2-desc': 'We manage your social media campaigns to reach the target audience.',
-                'service3-title': 'Ad Image Design', 'service3-desc': 'Creative and attractive designs for your posts and ads.',
+                'service3-title': 'Ad Image Design', 'service3-desc': 'Creative and attractive designs for your ads.',
                 'service4-title': 'Visual Identity', 'service4-desc': 'Design unique logos and complete visual identities for your brand.',
                 'service5-title': 'Web Development', 'service5-desc': 'We design, develop, and deploy your professional website to the web.',
                 'package-title': 'All-in-One Package (Plus)', 'monthly': '/ Monthly',
@@ -694,6 +1071,35 @@
         };
 
         let currentLang = 'ar';
+        
+        // --- Theme Toggle Logic ---
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+        }
+        
+        function updateThemeBtn() {
+            const themeBtn = document.getElementById('themeBtn');
+            if(themeBtn) {
+                if (document.body.classList.contains('light-mode')) {
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', updateThemeBtn);
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeBtn();
+        }
 
         function toggleLang() {
             const container = document.querySelector('.container');
@@ -701,7 +1107,7 @@
             setTimeout(() => {
                 currentLang = currentLang === 'ar' ? 'en' : 'ar';
                 document.documentElement.lang = currentLang;
-                document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+                document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
                 updateContent();
             }, 200);
             setTimeout(() => container.classList.remove('lang-changing'), 400);
@@ -710,18 +1116,58 @@
         function updateContent() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                el.innerHTML = translations[currentLang][key];
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
             });
             document.getElementById('langBtn').innerText = translations[currentLang]['lang-btn'];
         }
 
-        function showPage(pageId) {
+        // --- Routing System ---
+        function showPage(pageId, updateHash = true) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.querySelectorAll('nav a').forEach(l => l.classList.remove('active-link'));
-            const linkId = 'link-' + pageId;
-            if (document.getElementById(linkId)) document.getElementById(linkId).classList.add('active-link');
-            window.scrollTo(0, 0);
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                const link = document.getElementById('link-' + pageId);
+                if (link) link.classList.add('active-link');
+                
+                if (updateHash) {
+                    window.location.hash = pageId;
+                }
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function showGalleryCategory(catId, updateHash = true) {
+            showPage('gallery', false);
+            document.querySelectorAll('.gallery-section').forEach(s => s.classList.remove('active'));
+            const targetSection = document.getElementById('gallery-' + catId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                if (updateHash) {
+                    window.location.hash = (catId === 'home') ? 'gallery' : 'gallery-' + catId;
+                }
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Handle Hash Change for Deep Linking
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('load', handleRouting);
+
+        function handleRouting() {
+            const hash = window.location.hash.substring(1) || 'home';
+            if (hash.startsWith('gallery-')) {
+                const cat = hash.replace('gallery-', '');
+                showGalleryCategory(cat, false);
+            } else if (hash === 'gallery') {
+                showGalleryCategory('home', false);
+            } else {
+                showPage(hash, false);
+            }
         }
 
         function openSubscribe(service) {
@@ -759,7 +1205,73 @@
                 alert('Server Error');
             }
         }
-    </script>
-</body>
 
-</html>
+        // --- Data Loading ---
+        async function loadGalleryData() {
+            try {
+                const [webRes, imgRes, vidRes] = await Promise.all([
+                    fetch('/api/websites'),
+                    fetch('/api/images'),
+                    fetch('/api/videos')
+                ]);
+
+                const websites = await webRes.json();
+                renderWebsites(websites);
+
+                const images = await imgRes.json();
+                renderImages(images);
+
+                const videos = await vidRes.json();
+                renderVideos(videos);
+            } catch (e) { console.error("Error loading gallery:", e); }
+        }
+
+        function renderWebsites(data) {
+            const grid = document.getElementById('websites-grid');
+            grid.innerHTML = data.reverse().map(site => `
+                <div class="website-item">
+                    <img src="${(site.images && site.images[0]) || 'لوجو حياة.png'}" class="website-image" alt="${site.name}">
+                    <div style="padding: 20px;">
+                        <h3>${site.name}</h3>
+                        <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">${site.company}</p>
+                        <a href="${site.url.startsWith('http') ? site.url : 'https://'+site.url}" target="_blank" class="btn-subscribe" style="padding: 10px 20px; text-decoration: none;">زيارة الموقع</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderImages(data) {
+            const container = document.getElementById('images-container');
+            container.innerHTML = data.reverse().map(group => {
+                const imageUrls = group.urls || [group.url];
+                return `
+                <div class="image-group">
+                    <h3 class="image-group-title">من تصميمنا: ${group.name}</h3>
+                    <div class="grid">
+                        ${imageUrls.map(url => `
+                            <div class="portfolio-item">
+                                <img src="${url}" alt="${group.name}" onclick="window.open('${url}','_blank')" style="cursor: zoom-in;">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function renderVideos(data) {
+            const grid = document.getElementById('videos-grid');
+            grid.innerHTML = data.reverse().map(vid => `
+                <div class="portfolio-item">
+                    <video src="${vid.url}" controls style="border-radius: 20px; width: 100%;"></video>
+                    <div style="padding: 15px; text-align: center;">
+                        <h3 style="font-weight: 700;">${vid.name}</h3>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', loadGalleryData);
+    </script>
+
+</body>
